@@ -1,0 +1,19 @@
+{
+  "name": "mongo-validator",
+  "version": "1.0.0",
+  "description": "MongoDB JSON Payload to validator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fraxken/mongo-validator.git"
+  },
+  "author": "GENTILHOMME.Thomas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fraxken/mongo-validator/issues"
+  },
+  "homepage": "https://github.com/fraxken/mongo-validator#readme"
+}
