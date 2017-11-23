@@ -54,3 +54,11 @@ It will log (stdout) the following result :
 ```
 
 Use this object as a validator for MongoDB (when you create a new collection for example).
+
+mongoValidator function can take an options Object that allow you to redefine the attributes caracter.
+
+```js
+const validatorPayload = mongoValidator(payload, {
+  attributes_char: '#'
+});
+```
