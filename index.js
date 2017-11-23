@@ -39,19 +39,30 @@ const MONGO_ATTRIBUTES = new Set([
   'raw'
 ]);
 
+// DEFAULT Options
+const DEFAULT_OPTIONS = {
+  attributes_char: '__'
+};
+
 /**
  * @function MongoJSONToValidator
  * @param {Object} payload 
  * @returns {Object}
  */
-function MongoJSONToValidator(payload) {
+function MongoJSONToValidator(payload, options = DEFAULT_OPTIONS) {
   const schema = {
     validator: { $and: [] }
   };
 
+  // Assign default options!
+  if(typeof(options) !== 'object') {
+    options = DEFAULT_OPTIONS;
+  }
+  const { attributes_char = DEFAULT_OPTIONS.attributes_char } = options;
+
   // Apply generics attributes...
   MONGO_ATTRIBUTES.forEach((attributeStr) => {
-    const innerKey = `__${attributeStr}`;
+    const innerKey = `${attributes_char}${attributeStr}`;
     if (payload.hasOwnProperty(innerKey)) {
       schema[attributeStr] = payload[innerKey];
       delete payload[innerKey];
@@ -84,7 +95,7 @@ function MongoJSONToValidator(payload) {
       }
       else if ('object' === typeof(v)) {
         let rule = { $type: 'object' };
-        if (v.hasOwnProperty('__exists')) {
+        if (v.hasOwnProperty(attributes_char+'exists')) {
           rule.$exists = true;
           delete v.__exist;
         }
